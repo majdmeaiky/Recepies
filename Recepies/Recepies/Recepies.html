@@ -237,13 +237,16 @@
                 this.name = name;
                 this.img = img;
                 this.calories = calories;
+                
+               
             }
 
             get Id() { return this.id; }
             get Name() { return this.name; }
             get Img() { return this.img; }
             get Calories() { return this.calories; }
-            render()  {
+
+            render() {
                 let finelEl = document.createElement("div");
                 finelEl.setAttribute("class", "card");
                 let img = document.createElement("img");
@@ -252,7 +255,7 @@
                 product.innerHTML = this.name;
                 let cal = document.createElement("p");
                 cal.setAttribute("class", "price");
-                cal.innerHTML = this.Calories;
+                cal.innerHTML = this.calories;
                 let p = document.createElement("p");
                 let checkbox = document.createElement("input");
                 checkbox.setAttribute("type", "checkbox");
@@ -264,6 +267,11 @@
                 finelEl.appendChild(p);
                 return finelEl;
             }
+
+             justconsole() {
+                alert("fuck!!");
+            }
+
 
         }
         class DishRecipe {
@@ -291,7 +299,10 @@
             if (JSON.parse(localStorage.getItem("ingrediant_list") == null)) {
                 ingrediant_list = [];
             } else {
-                ingrediant_list = JSON.parse(localStorage.getItem("ingrediant_list"));
+                ingrediant_list_untyped = JSON.parse(localStorage.getItem("ingrediant_list"));
+                ingrediant_list = [];
+                for (let ing of ingrediant_list_untyped)
+                    ingrediant_list.push(new Ingrediant(ing.id, ing.name, ing.img, ing.calories))
             }
             $("#newRecipe").click(show_recipe);
             $("#newIngrediant").click(show_ingrediant);
@@ -301,12 +312,18 @@
             $('#ingrediantForm').hide();
             $('#recipeForm').show();
             let container = $('#ingrediantContainer');
-            for (ing in ingrediant_list) {
-                console.log(ingrediant_list[ing]);
-                let el = ingrediant_list[ing].render();
-                container.appendChild(el);
+            console.log("cont",container[0]);
+            for (let ing of ingrediant_list) {
+                container[0].appendChild(ing.render());
+                //console.log("ing",ing);
+                //ing.justconsole();
+                //console.log("el",el);
+                //container.appendChild(el);
             }
             //ingrediant_list.forEach(el => $('#ingrediantContainer').appendChild(el.Render()));
+            //let ing = new Ingrediant('012', 'abc', '', '200');
+            //console.log(ing);
+            //ing.justconsole();
         }
         function show_ingrediant() {
             $('#recipeForm').hide();
@@ -323,9 +340,9 @@
             console.log(booliean);
             if (booliean) {
                 alert("these is unique");
-                ingrediant = new Ingrediant(ingrediant_list.length, $("#name").val(), $("#img").val(), $("#calories").val());
-                console.log(ingrediant);
-                ingrediant_list.push(ingrediant);
+               let ing = new Ingrediant(ingrediant_list.length, $("#name").val(), $("#img").val(), $("#calories").val());
+                //console.log(ingrediant);
+                ingrediant_list.push(ing);
                 localStorage.setItem("ingrediant_list", (JSON.stringify(ingrediant_list)));
 
             } else {
@@ -413,7 +430,7 @@
                             </form>
 
                         </div>
-                        <div id="ingrediantContainer">
+                        <!--<div id="ingrediantContainer">
                             <div class="card" style="border:solid black 1px; width:300px">
                                 <img src="https://zippypaws.com/app/uploads/2018/05/strawberry-waffles-1024x668.jpg" alt="Strawberry Waffle" />            <h1>apple</h1>
                                 <span><b>Cooking Method: </b></span><br />
@@ -422,7 +439,7 @@
                                 <a href="#">View Recipe</a>
 
                             </div>
-                        </div>
+                        </div>-->
                     </div>
 
                 </div>
