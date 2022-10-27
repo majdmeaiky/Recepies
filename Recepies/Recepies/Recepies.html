@@ -225,6 +225,8 @@
         .card img {
             width: 100%
         }
+
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -294,7 +296,7 @@
 
             let booliean = ingrediant_list.every(function (element) {
 
-                return element.Id != $("#id").val();
+                return element.Name != $("#name").val();
             });
             console.log(booliean);
             if (booliean) {
@@ -308,6 +310,10 @@
                 alert("this ingrediant allready exist");
 
             }
+        }
+
+        function submit_recipe() {
+
         }
 
     </script>
@@ -330,7 +336,7 @@
                         <div class="form-container">
                             <div class="form-icon">
                                 <span><i class="fa fa-file-alt"></i></span>
-                            </div>
+                            </div><br /><br /><br /><br />
                             <div id="recipeDiv">
                                 <form id="recipeForm" class="form-horizontal">
 
@@ -356,7 +362,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="button" class="btn signup" value="Create Recipe" onclick="submit_ingrediant()">
+                                        <input type="button" class="btn signup" value="Create Recipe" onclick="submit_recipe()">
                                     </div>
 
 
@@ -379,11 +385,21 @@
                                     <input type="text" id="calories" class="form-control" placeholder="Enter calories">
                                 </div>
                                 <div class="form-group">
-                                    <input type="button" class="btn signup" value="Submit" onclick="submit_ingrediant()">
+                                    <input type="button" class="btn signup" value="Submit Ingerdiant" onclick="submit_ingrediant()">
                                 </div>
                                 <hr>
                             </form>
 
+                        </div>
+                        <div id="ingrediantContainer">
+                            <div class="card" style="border:solid black 1px; width:300px">
+                                <img src="https://zippypaws.com/app/uploads/2018/05/strawberry-waffles-1024x668.jpg" alt="Strawberry Waffle" />            <h1>apple</h1>
+                                <span><b>Cooking Method: </b></span><br />
+                                <span><b>Total cooking time: </b></span><br />
+                                <span><b>total calories: </b></span><br /><br />
+                                <a href="#">View Recipe</a>
+
+                            </div>
                         </div>
                     </div>
 
@@ -393,8 +409,9 @@
 
         <div class="open_grepper_editor" title="Edit & Save To Grepper"></div>
 
-
+       
     </div>
+   
     <!--<div class="card" style="width: 18rem;">
         <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.morfix.co.il%2Fapple&psig=AOvVaw1JSN4iScmATmaVhWFf9lF0&ust=1666954610561000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCPjYj_-fgPsCFQAAAAAdAAAAABAE" class="card-img-top" alt="...">
         <div class="card-body">
