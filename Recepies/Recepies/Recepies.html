@@ -165,7 +165,7 @@
             }
 
             a:hover {
-                color: aqua;
+                color: #fff;
             }
 
                 a:hover:after {
@@ -241,11 +241,26 @@
             get Name() { return this.name; }
             get Img() { return this.img; }
             get Calories() { return this.calories; }
-            Reder() {
+            render()  {
                 let finelEl = document.createElement("div");
                 finelEl.setAttribute("class", "card");
                 let img = document.createElement("img");
-
+                img.setAttribute("src", this.img);
+                let product = document.createElement("h1");
+                product.innerHTML = this.name;
+                let cal = document.createElement("p");
+                cal.setAttribute("class", "price");
+                cal.innerHTML = this.Calories;
+                let p = document.createElement("p");
+                let checkbox = document.createElement("input");
+                checkbox.setAttribute("type", "checkbox");
+                checkbox.setAttribute("id", this.id);
+                p.appendChild(checkbox);
+                finelEl.appendChild(img);
+                finelEl.appendChild(product);
+                finelEl.appendChild(cal);
+                finelEl.appendChild(p);
+                return finelEl;
             }
 
         }
@@ -283,6 +298,13 @@
         function show_recipe() {
             $('#ingrediantForm').hide();
             $('#recipeForm').show();
+            let container = $('#ingrediantContainer');
+            for (ing in ingrediant_list) {
+                console.log(ingrediant_list[ing]);
+                let el = ingrediant_list[ing].render();
+                container.appendChild(el);
+            }
+            //ingrediant_list.forEach(el => $('#ingrediantContainer').appendChild(el.Render()));
         }
         function show_ingrediant() {
             $('#recipeForm').hide();
