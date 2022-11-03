@@ -373,10 +373,12 @@
             }
 
             showDishIngrediants() {
-                alert("showing");
+                $('#modal').show();
+                $('#overlay').show();
                 let show = $('#modal-body');
+                show[0].innerHTML = "";
                 for (let ing of this.ingredients) {
-                    show.appendChild(ing.render());
+                    show[0].appendChild(ing.render());
                 }
             }
 
@@ -384,6 +386,8 @@
         dishRecepies = []; // array of dish recepies
 
         $(document).ready(function () {
+            $('#modal').hide();
+            $('#overlay').hide();
 
             $('#ingrediantForm').hide();
             $('#recipeForm').hide();
@@ -466,10 +470,15 @@
         }
 
         function showDishIngrediants_outer(id) {
-            let dish = dishRecepies.find((recpie) => { recpie.id == id });
+            let dish = dishRecepies.find(e =>  e.id == id );
+           
             dish.showDishIngrediants();
         }
 
+        function closePop() {
+            $('#modal').hide();
+            $('#overlay').hide();
+        }
     </script>
 </head>
 <body>
@@ -564,7 +573,7 @@
         <div id="modal" class="modal">
             <div class="modal-header">
                 <div class="modal-titel">Ingredients</div>
-                <button class="close-button">&times;</button>
+                <button class="close-button" onclick="closePop()">&times;</button>
             </div>
             <div id="modal-body" class="modal-body">
 
